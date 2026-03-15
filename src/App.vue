@@ -79,6 +79,22 @@
     <main class="flex-1 overflow-hidden" :class="isLoggedIn && !isLoginPage ? 'max-w-6xl w-full mx-auto px-4 py-5' : ''">
       <RouterView />
     </main>
+
+    <!-- 未儲存警告 -->
+    <AlertDialog v-model:open="showLogoutDialog">
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>確定要登出？</AlertDialogTitle>
+          <AlertDialogDescription>
+            目前有尚未儲存的內容，登出後將會遺失。
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>取消</AlertDialogCancel>
+          <AlertDialogAction @click="doLogout">仍要登出</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   </div>
 </template>
 
@@ -87,12 +103,19 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useDark, useToggle } from '@vueuse/core'
 import { token, currentUser, logout } from '@/service/keep.js'
+import { fileStatuses } from '@/service/saveStore.js'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel,
+  AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
+  AlertDialogHeader, AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 import { Menu, Sun, Moon } from 'lucide-vue-next'
 
 const sheetOpen = ref(false)
+const showLogoutDialog = ref(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
@@ -108,7 +131,20 @@ const navItems = [
   { to: '/about', label: '關於 Henry' },
 ]
 
+const hasDirty = computed(() =>
+  Object.values(fileStatuses).some(s => s === 'dirty')
+)
+
 function handleLogout() {
+  if (hasDirty.value) {
+    showLogoutDialog.value = true
+  } else {
+    doLogout()
+  }
+}
+
+function doLogout() {
+  sheetOpen.value = false
   logout()
   router.push('/login')
 }
