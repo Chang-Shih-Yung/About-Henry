@@ -1,6 +1,14 @@
 <template>
-  <div class="min-h-screen bg-background flex items-center justify-center p-4">
-    <Card class="w-full max-w-sm shadow-lg">
+  <div class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" @mousemove="onMouseMove">
+    <!-- 背景圖 -->
+    <div
+      class="absolute inset-[-6%] bg-cover bg-center transition-transform duration-75 ease-out"
+      :style="{ backgroundImage: 'url(/bg-login.jpg)', transform: `translate(${offset.x}px, ${offset.y}px) scale(1.12)` }"
+    />
+    <!-- 深色遮罩 -->
+    <div class="absolute inset-0 bg-black/50" />
+
+    <Card class="w-full max-w-sm shadow-lg relative z-10">
       <CardHeader class="text-center pb-2">
         <div class="mx-auto mb-3 w-10 h-10 rounded-full bg-primary flex items-center justify-center">
           <svg class="w-5 h-5 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -24,7 +32,6 @@
                 autocomplete="username"
                 :class="error ? 'border-destructive' : ''"
               />
-              <!-- 記憶帳號 tag -->
               <button
                 v-if="rememberedUser && form.username !== rememberedUser"
                 type="button"
@@ -71,14 +78,13 @@
         </form>
       </CardContent>
 
-      <CardFooter class="justify-center pt-0">
-      </CardFooter>
+      <CardFooter class="justify-center pt-0" />
     </Card>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { login, getRememberedUser, saveRememberedUser, clearRememberedUser } from '@/service/keep.js'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
@@ -93,6 +99,7 @@ const form = ref({ username: '', password: '', remember: false })
 const error = ref('')
 const loading = ref(false)
 const rememberedUser = ref('')
+const offset = ref({ x: 0, y: 0 })
 
 const DEFAULT_USER = 'henry1010921@gmail.com'
 
@@ -102,7 +109,38 @@ onMounted(() => {
   rememberedUser.value = username
   form.value.username = username
   form.value.remember = !!saved
+
+  // 陀螺儀（手機）
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', onGyro)
+  }
 })
+
+onUnmounted(() => {
+  window.removeEventListener('deviceorientation', onGyro)
+})
+
+// 滑鼠視差（桌面）
+function onMouseMove(e) {
+  if (window.matchMedia('(hover: none)').matches) return
+  const cx = window.innerWidth / 2
+  const cy = window.innerHeight / 2
+  offset.value = {
+    x: ((e.clientX - cx) / cx) * -12,
+    y: ((e.clientY - cy) / cy) * -8,
+  }
+}
+
+// 陀螺儀視差（手機）
+function onGyro(e) {
+  if (!window.matchMedia('(hover: none)').matches) return
+  const gamma = Math.max(-30, Math.min(30, e.gamma || 0)) // 左右傾斜
+  const beta  = Math.max(-30, Math.min(30, (e.beta || 0) - 45)) // 前後傾斜，減 45 為自然握持角度
+  offset.value = {
+    x: (gamma / 30) * -12,
+    y: (beta  / 30) * -8,
+  }
+}
 
 function fillRemembered() {
   form.value.username = rememberedUser.value
@@ -117,7 +155,6 @@ async function handleLogin() {
   }
 
   loading.value = true
-  // 模擬網路延遲
   await new Promise(r => setTimeout(r, 400))
 
   const ok = login(form.value.username, form.value.password)
