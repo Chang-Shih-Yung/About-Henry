@@ -11,7 +11,14 @@
           class="border border-border rounded-xl overflow-hidden bg-card"
         >
           <AccordionTrigger class="px-4 py-3 hover:no-underline hover:bg-muted/50 [&>svg]:text-muted-foreground">
-            <div class="flex items-center gap-3 min-w-0">
+            <div class="flex items-center gap-3 min-w-0 flex-1">
+              <button
+                v-if="mode === 'edit'"
+                @click.stop="openDeleteDialog(i)"
+                class="shrink-0 text-destructive hover:text-destructive/80 transition-colors"
+              >
+                <X class="size-4" />
+              </button>
               <Badge variant="secondary" class="text-xs shrink-0">{{ i + 1 }} / {{ sections.length }}</Badge>
               <span class="text-sm font-medium text-foreground">
                 {{ getSectionTitle(section.content) || `區塊 ${i + 1}` }}
@@ -39,18 +46,51 @@
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+
+      <!-- 新增區塊按鈕 -->
+      <div v-if="mode === 'edit'" class="flex justify-center pb-4">
+        <button
+          @click="addSection"
+          class="size-10 rounded-full bg-muted/60 hover:bg-muted flex items-center justify-center transition-colors"
+        >
+          <Plus class="size-5 text-muted-foreground" />
+        </button>
+      </div>
     </div>
   </div>
+
+  <!-- 刪除確認 -->
+  <AlertDialog :open="deleteDialogOpen" @update:open="deleteDialogOpen = $event">
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle>確定刪除此區塊？</AlertDialogTitle>
+        <AlertDialogDescription>
+          刪除後無法復原，確定要移除這個區塊嗎？
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel @click="deleteDialogOpen = false">取消</AlertDialogCancel>
+        <AlertDialogAction @click="confirmDelete" class="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+          刪除
+        </AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
 </template>
 
 <script setup>
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { marked } from 'marked'
+import { X, Plus } from 'lucide-vue-next'
 import { authFetch } from '@/service/keep.js'
 import { fileStatuses, setStatus } from '@/service/saveStore.js'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
+import {
+  AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogFooter,
+  AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel
+} from '@/components/ui/alert-dialog'
 
 const props = defineProps({
   filename: { type: String, required: true },
@@ -108,6 +148,31 @@ function markDirty() {
     sessionStorage.setItem(draftKey, current)
     setStatus(props.filename, 'dirty')
   }
+}
+
+const deleteDialogOpen = ref(false)
+const sectionToDelete = ref(null)
+
+function openDeleteDialog(index) {
+  sectionToDelete.value = index
+  deleteDialogOpen.value = true
+}
+
+function confirmDelete() {
+  if (sectionToDelete.value !== null) {
+    sections.value.splice(sectionToDelete.value, 1)
+    openItems.value = sections.value.map((_, i) => `item-${i}`)
+    markDirty()
+  }
+  deleteDialogOpen.value = false
+  sectionToDelete.value = null
+}
+
+function addSection() {
+  sections.value.push({ content: '## 新區塊\n\n在這裡輸入內容…' })
+  const newIndex = sections.value.length - 1
+  openItems.value = [...openItems.value, `item-${newIndex}`]
+  markDirty()
 }
 
 function getSectionTitle(content) {
