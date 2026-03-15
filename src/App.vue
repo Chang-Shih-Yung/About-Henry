@@ -4,7 +4,7 @@
     <nav v-if="isLoggedIn && !isLoginPage" class="shrink-0 bg-card border-b border-border z-10">
       <div class="max-w-6xl mx-auto px-4 flex items-center gap-1 h-14">
         <span class="text-xs font-bold text-muted-foreground mr-4 tracking-widest uppercase select-none">
-          Fubon
+          Henry
         </span>
 
         <!-- Desktop nav -->

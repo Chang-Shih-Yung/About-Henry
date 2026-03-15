@@ -155,8 +155,8 @@ function onGyro(e) {
   const gamma = Math.max(-30, Math.min(30, e.gamma || 0)) // 左右傾斜
   const beta  = Math.max(-30, Math.min(30, (e.beta || 0) - 45)) // 前後傾斜，減 45 為自然握持角度
   offset.value = {
-    x: (gamma / 30) * -12,
-    y: (beta  / 30) * -8,
+    x: (gamma / 30) * -20,
+    y: (beta  / 30) * -14,
   }
 }
 
