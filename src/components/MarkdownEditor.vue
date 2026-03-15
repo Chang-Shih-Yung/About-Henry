@@ -70,6 +70,7 @@ async function doSave() {
     if (data.ok) {
       sessionStorage.removeItem(draftKey)
       setStatus(props.filename, 'saved')
+      setTimeout(() => setStatus(props.filename, 'idle'), 3000)
     } else {
       setStatus(props.filename, 'error')
     }
