@@ -18,7 +18,7 @@
         <span v-if="status === 'dirty'" class="text-xs text-amber-500">未儲存</span>
         <span v-else-if="status === 'saved'" class="text-xs text-emerald-600">已儲存</span>
         <span v-else-if="status === 'error'" class="text-xs text-destructive">失敗</span>
-        <Button size="sm" class="h-7 px-3 text-xs" :disabled="status === 'saving'" @click="editorRef?.doSave()">
+        <Button size="sm" class="h-7 px-3 text-xs" :disabled="status !== 'dirty' && status !== 'error'" @click="editorRef?.doSave()">
           <svg v-if="status === 'saving'" class="animate-spin w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>

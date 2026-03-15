@@ -103,7 +103,7 @@ function markDirty() {
   const original = parseContent(props.initialContent).map(s => s.content).join(DIVIDER)
   if (current === original) {
     sessionStorage.removeItem(draftKey)
-    setStatus(props.filename, 'saved')
+    setStatus(props.filename, 'idle')
   } else {
     sessionStorage.setItem(draftKey, current)
     setStatus(props.filename, 'dirty')
