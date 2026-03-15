@@ -13,7 +13,7 @@
           <AccordionTrigger class="px-4 py-3 hover:no-underline hover:bg-muted/50 [&>svg]:text-muted-foreground">
             <div class="flex items-center gap-3 min-w-0">
               <Badge variant="secondary" class="text-xs shrink-0">{{ i + 1 }} / {{ sections.length }}</Badge>
-              <span class="text-sm font-medium text-foreground truncate">
+              <span class="text-sm font-medium text-foreground">
                 {{ getSectionTitle(section.content) || `區塊 ${i + 1}` }}
               </span>
             </div>
