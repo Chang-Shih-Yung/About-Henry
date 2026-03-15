@@ -8,7 +8,7 @@
     <!-- 深色遮罩 -->
     <div class="absolute inset-0 bg-black/65" />
 
-    <Card class="w-full max-w-sm shadow-lg relative z-10 bg-black/50 backdrop-blur-md border-white/10 text-white">
+    <Card class="w-full max-w-sm shadow-lg relative z-10 bg-black/25 backdrop-blur-md border-white/10 text-white">
       <CardHeader class="text-center pb-2">
         <div class="mx-auto mb-3 w-10 h-10 rounded-full bg-primary flex items-center justify-center">
           <svg class="w-5 h-5 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
