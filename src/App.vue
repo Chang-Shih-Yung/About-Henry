@@ -42,7 +42,7 @@
             <SheetContent side="right" class="w-full flex flex-col p-0 bg-background/60 backdrop-blur-xl border-l-0" :aria-describedby="undefined">
               <!-- Header -->
               <div class="flex items-center justify-between px-6 py-5 border-b">
-                <SheetTitle class="text-sm font-semibold tracking-widest uppercase text-foreground">Fubon</SheetTitle>
+                <SheetTitle class="text-sm font-semibold tracking-widest uppercase text-foreground">Henry</SheetTitle>
               </div>
 
               <!-- Nav links -->
