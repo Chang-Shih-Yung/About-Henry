@@ -15,7 +15,7 @@
               <button
                 v-if="mode === 'edit'"
                 @click.stop="openDeleteDialog(i)"
-                class="shrink-0 text-destructive hover:text-destructive/80 transition-colors"
+                class="shrink-0 text-destructive hover:text-destructive/80 transition-colors bg-destructive/10 hover:bg-destructive/20 rounded-full p-1"
               >
                 <X class="size-4" />
               </button>
