@@ -3,6 +3,8 @@ const REPO = 'About-Henry'
 const ALLOWED = ['Intro.md', 'QA.md', 'About.md']
 
 export default async function handler(req, res) {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate')
+
   if (req.method !== 'GET') {
     return res.status(405).json({ ok: false, error: 'Method Not Allowed' })
   }
@@ -29,7 +31,6 @@ export default async function handler(req, res) {
 
     const data = await response.json()
     const content = Buffer.from(data.content, 'base64').toString('utf-8')
-    res.setHeader('Cache-Control', 'no-store')
     return res.status(200).json({ ok: true, content })
   } catch (e) {
     return res.status(500).json({ ok: false, error: e.message })
