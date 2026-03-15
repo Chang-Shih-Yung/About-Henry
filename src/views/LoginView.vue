@@ -6,24 +6,24 @@
       :style="{ backgroundImage: 'url(/bg-login.jpg)', transform: `translate(${offset.x}px, ${offset.y}px) scale(1.12)` }"
     />
     <!-- 深色遮罩 -->
-    <div class="absolute inset-0 bg-black/50" />
+    <div class="absolute inset-0 bg-black/65" />
 
-    <Card class="w-full max-w-sm shadow-lg relative z-10">
+    <Card class="w-full max-w-sm shadow-lg relative z-10 bg-black/50 backdrop-blur-md border-white/10 text-white">
       <CardHeader class="text-center pb-2">
         <div class="mx-auto mb-3 w-10 h-10 rounded-full bg-primary flex items-center justify-center">
           <svg class="w-5 h-5 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
           </svg>
         </div>
-        <CardTitle class="text-xl">Henry</CardTitle>
-        <CardDescription>登入以進入工作區</CardDescription>
+        <CardTitle class="text-xl text-white">Henry</CardTitle>
+        <CardDescription class="text-white/60">歡迎</CardDescription>
       </CardHeader>
 
       <CardContent>
         <form @submit.prevent="handleLogin" class="space-y-4">
           <!-- Username -->
           <div class="space-y-1.5">
-            <Label for="username">帳號</Label>
+            <Label for="username" class="text-white/80">帳號</Label>
             <div class="relative">
               <Input
                 id="username"
@@ -48,7 +48,7 @@
 
           <!-- Password -->
           <div class="space-y-1.5">
-            <Label for="password">密碼</Label>
+            <Label for="password" class="text-white/80">密碼</Label>
             <Input
               id="password"
               v-model="form.password"
@@ -63,7 +63,7 @@
           <!-- Remember me -->
           <div class="flex items-center gap-2">
             <Checkbox id="remember" v-model="form.remember" />
-            <Label for="remember" class="text-sm font-normal cursor-pointer text-muted-foreground">
+            <Label for="remember" class="text-sm font-normal cursor-pointer text-white/60">
               記住帳號
             </Label>
           </div>
