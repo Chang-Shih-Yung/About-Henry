@@ -12,13 +12,15 @@
         >
           <AccordionTrigger class="px-4 py-3 hover:no-underline hover:bg-muted/50 [&>svg]:text-muted-foreground">
             <div class="flex items-center gap-3 min-w-0 flex-1">
-              <button
-                v-if="mode === 'edit'"
-                @click.stop="openDeleteDialog(i)"
-                class="shrink-0 text-destructive hover:text-destructive/80 transition-colors bg-destructive/10 hover:bg-destructive/20 rounded-full p-1"
-              >
-                <X class="size-4" />
-              </button>
+              <Transition name="fade-icon">
+                <button
+                  v-if="mode === 'edit'"
+                  @click.stop="openDeleteDialog(i)"
+                  class="shrink-0 text-destructive hover:text-destructive/80 transition-colors bg-destructive/10 hover:bg-destructive/20 rounded-full p-1"
+                >
+                  <X class="size-4" />
+                </button>
+              </Transition>
               <Badge variant="secondary" class="text-xs shrink-0">{{ i + 1 }} / {{ sections.length }}</Badge>
               <span class="text-sm font-medium text-foreground">
                 {{ getSectionTitle(section.content) || `區塊 ${i + 1}` }}
@@ -231,4 +233,14 @@ defineExpose({ doSave })
 .md-preview :deep(code) { background: hsl(var(--muted)); padding: 0.1em 0.3em; border-radius: 4px; font-size: 0.85em; font-family: monospace; }
 .md-preview :deep(blockquote) { border-left: 3px solid hsl(var(--border)); padding-left: 0.75rem; color: hsl(var(--muted-foreground)); font-style: italic; margin: 0.5rem 0; }
 .md-preview :deep(hr) { display: none; }
+
+.fade-icon-enter-active,
+.fade-icon-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.fade-icon-enter-from,
+.fade-icon-leave-to {
+  opacity: 0;
+  transform: scale(0.7);
+}
 </style>
