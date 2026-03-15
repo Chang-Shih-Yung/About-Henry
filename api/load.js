@@ -29,6 +29,7 @@ export default async function handler(req, res) {
 
     const data = await response.json()
     const content = Buffer.from(data.content, 'base64').toString('utf-8')
+    res.setHeader('Cache-Control', 'no-store')
     return res.status(200).json({ ok: true, content })
   } catch (e) {
     return res.status(500).json({ ok: false, error: e.message })
