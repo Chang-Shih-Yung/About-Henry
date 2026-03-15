@@ -8,6 +8,18 @@
     <!-- 深色遮罩 -->
     <div class="absolute inset-0 bg-black/65" />
 
+    <!-- iOS 陀螺儀啟用提示（只在手機 + 未授權時顯示） -->
+    <button
+      v-if="showGyroHint"
+      @click="requestGyroPermission"
+      class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/70 text-xs hover:bg-white/20 transition-all"
+    >
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+      </svg>
+      點擊啟用動態效果
+    </button>
+
     <Card class="w-full max-w-md shadow-lg relative z-10 bg-black/25 backdrop-blur-md border-white/10 text-white px-4 py-2">
       <CardHeader class="text-center pb-2">
         <div class="mx-auto mb-3 w-10 h-10 rounded-full bg-primary flex items-center justify-center">
@@ -100,6 +112,7 @@ const error = ref('')
 const loading = ref(false)
 const rememberedUser = ref('')
 const offset = ref({ x: 0, y: 0 })
+const showGyroHint = ref(false)
 
 const DEFAULT_USER = 'henry1010921@gmail.com'
 
@@ -111,18 +124,20 @@ onMounted(() => {
   form.value.remember = !!saved
 
   // 陀螺儀（手機）
-  if (window.DeviceOrientationEvent) {
+  const isMobile = window.matchMedia('(hover: none)').matches
+  if (isMobile && window.DeviceOrientationEvent) {
     if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-      // iOS 13+ 需要用戶手勢觸發授權，監聽第一次點擊
-      document.addEventListener('click', requestGyroPermission, { once: true })
+      // iOS 13+：顯示提示按鈕，等待用戶主動點擊授權
+      showGyroHint.value = true
     } else {
-      // Android / 其他
+      // Android / 其他：直接監聽
       window.addEventListener('deviceorientation', onGyro)
     }
   }
 })
 
 async function requestGyroPermission() {
+  showGyroHint.value = false
   try {
     const permission = await DeviceOrientationEvent.requestPermission()
     if (permission === 'granted') {
