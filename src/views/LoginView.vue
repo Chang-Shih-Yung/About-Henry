@@ -112,12 +112,30 @@ onMounted(() => {
 
   // 陀螺儀（手機）
   if (window.DeviceOrientationEvent) {
-    window.addEventListener('deviceorientation', onGyro)
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      // iOS 13+ 需要用戶手勢觸發授權，監聽第一次點擊
+      document.addEventListener('click', requestGyroPermission, { once: true })
+    } else {
+      // Android / 其他
+      window.addEventListener('deviceorientation', onGyro)
+    }
   }
 })
 
+async function requestGyroPermission() {
+  try {
+    const permission = await DeviceOrientationEvent.requestPermission()
+    if (permission === 'granted') {
+      window.addEventListener('deviceorientation', onGyro)
+    }
+  } catch {
+    window.addEventListener('deviceorientation', onGyro)
+  }
+}
+
 onUnmounted(() => {
   window.removeEventListener('deviceorientation', onGyro)
+  document.removeEventListener('click', requestGyroPermission)
 })
 
 // 滑鼠視差（桌面）
