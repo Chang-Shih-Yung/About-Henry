@@ -99,8 +99,15 @@ watch(() => props.initialContent, (val) => {
 }, { immediate: true })
 
 function markDirty() {
-  setStatus(props.filename, 'dirty')
-  sessionStorage.setItem(draftKey, joinSections())
+  const current = joinSections()
+  const original = parseContent(props.initialContent).map(s => s.content).join(DIVIDER)
+  if (current === original) {
+    sessionStorage.removeItem(draftKey)
+    setStatus(props.filename, 'saved')
+  } else {
+    sessionStorage.setItem(draftKey, current)
+    setStatus(props.filename, 'dirty')
+  }
 }
 
 function getSectionTitle(content) {
