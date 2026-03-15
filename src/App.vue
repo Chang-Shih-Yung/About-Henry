@@ -24,6 +24,10 @@
           <Badge variant="outline" class="text-xs font-normal hidden sm:inline-flex">
             {{ currentUser?.username }}
           </Badge>
+          <Button variant="ghost" size="icon" @click="toggleDark()" class="h-8 w-8 text-muted-foreground">
+            <Sun v-if="isDark" class="h-4 w-4" />
+            <Moon v-else class="h-4 w-4" />
+          </Button>
           <Button variant="ghost" size="sm" @click="handleLogout" class="hidden sm:inline-flex text-muted-foreground h-7 px-2 text-xs">
             登出
           </Button>
@@ -35,27 +39,33 @@
                 <Menu class="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" class="w-64 pt-10">
-              <SheetHeader class="mb-4">
-                <SheetTitle class="text-left text-sm text-muted-foreground tracking-widest uppercase">Fubon</SheetTitle>
-              </SheetHeader>
-              <nav class="flex flex-col gap-1">
+            <SheetContent side="right" class="w-full flex flex-col p-0 bg-background/60 backdrop-blur-xl border-l-0" :aria-describedby="undefined">
+              <!-- Header -->
+              <div class="flex items-center justify-between px-6 py-5 border-b">
+                <SheetTitle class="text-sm font-semibold tracking-widest uppercase text-foreground">Fubon</SheetTitle>
+              </div>
+
+              <!-- Nav links -->
+              <nav class="flex flex-col px-4 py-4 gap-0.5 flex-1">
+                <p class="text-xs text-muted-foreground px-2 mb-2 tracking-wide">選單</p>
                 <RouterLink
                   v-for="item in navItems"
                   :key="item.to"
                   :to="item.to"
                   @click="sheetOpen = false"
-                  class="px-4 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                  class="px-2 py-2.5 text-base font-medium transition-colors rounded-md"
                   :class="$route.path === item.to
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'"
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'"
                 >
                   {{ item.label }}
                 </RouterLink>
               </nav>
-              <div class="mt-6 pt-4 border-t flex items-center justify-between">
-                <span class="text-xs text-muted-foreground">{{ currentUser?.username }}</span>
-                <Button variant="ghost" size="sm" @click="handleLogout" class="text-muted-foreground h-7 px-2 text-xs">
+
+              <!-- Footer -->
+              <div class="px-6 py-5 border-t flex items-center justify-between">
+                <span class="text-xs text-muted-foreground truncate max-w-[140px]">{{ currentUser?.username }}</span>
+                <Button variant="ghost" size="sm" @click="handleLogout" class="text-muted-foreground h-7 px-2 text-xs shrink-0">
                   登出
                 </Button>
               </div>
@@ -75,13 +85,16 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useDark, useToggle } from '@vueuse/core'
 import { token, currentUser, logout } from '@/service/keep.js'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { Menu } from 'lucide-vue-next'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { Menu, Sun, Moon } from 'lucide-vue-next'
 
 const sheetOpen = ref(false)
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 
 const route = useRoute()
 const router = useRouter()
