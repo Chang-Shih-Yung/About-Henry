@@ -8,7 +8,7 @@
     <!-- 深色遮罩 -->
     <div class="absolute inset-0 bg-black/65" />
 
-    <Card class="w-full max-w-sm shadow-lg relative z-10 bg-black/25 backdrop-blur-md border-white/10 text-white">
+    <Card class="w-full max-w-md shadow-lg relative z-10 bg-black/25 backdrop-blur-md border-white/10 text-white px-4 py-2">
       <CardHeader class="text-center pb-2">
         <div class="mx-auto mb-3 w-10 h-10 rounded-full bg-primary flex items-center justify-center">
           <svg class="w-5 h-5 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -68,7 +68,7 @@
             </Label>
           </div>
 
-          <Button type="submit" class="w-full" :disabled="loading">
+          <Button type="submit" class="w-full bg-white text-black hover:bg-white/90" :disabled="loading">
             <svg v-if="loading" class="animate-spin w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
