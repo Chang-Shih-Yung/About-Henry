@@ -1,7 +1,7 @@
 <template>
   <div class="h-full flex flex-col">
     <div class="mb-2 shrink-0 flex items-center gap-3">
-      <h1 class="text-xl font-bold text-foreground shrink-0">問答準備</h1>
+      <h1 class="text-xl font-bold text-foreground shrink-0">Q&A</h1>
       <p class="text-sm text-muted-foreground hidden sm:block">
         編輯 <code class="text-xs bg-muted px-1.5 py-0.5 rounded font-mono">QA.md</code>
       </p>

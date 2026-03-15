@@ -126,9 +126,9 @@ const isLoggedIn = computed(() => !!token.value)
 const isLoginPage = computed(() => route.path === '/login')
 
 const navItems = [
-  { to: '/intro', label: '自我介紹' },
+  { to: '/intro', label: 'Intro' },
   { to: '/qa', label: 'Q&A' },
-  { to: '/about', label: '關於 Henry' },
+  { to: '/about', label: 'About' },
 ]
 
 const hasDirty = computed(() =>
