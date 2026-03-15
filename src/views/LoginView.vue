@@ -72,7 +72,6 @@
       </CardContent>
 
       <CardFooter class="justify-center pt-0">
-        <p class="text-xs text-muted-foreground">預設帳號 <code class="font-mono">henry1010921@gmail.com</code>，密碼 <code class="font-mono">111111</code></p>
       </CardFooter>
     </Card>
   </div>
