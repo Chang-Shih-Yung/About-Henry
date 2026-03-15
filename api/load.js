@@ -14,6 +14,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ ok: false, error: 'Invalid filename' })
   }
 
+  const pat = process.env.GH_PAT
+  console.log('GH_PAT set:', !!pat, 'length:', pat?.length)
+
   try {
     const response = await fetch(
       `https://api.github.com/repos/${OWNER}/${REPO}/contents/${filename}`,
