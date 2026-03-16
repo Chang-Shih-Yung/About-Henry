@@ -27,7 +27,10 @@ function generateFakeJwt(username) {
 }
 
 // ── Mock credentials ────────────────────────────────────────
-const MOCK_USERS = [{ username: 'henry1010921@gmail.com', password: '111111' }]
+const MOCK_USERS = [
+  { username: 'henry1010921@gmail.com', password: '111111', role: 'admin' },
+  { username: 'guest', password: 'fubon2025', role: 'viewer' },
+]
 
 // ── Public API ───────────────────────────────────────────────
 export function login(username, password) {
@@ -37,13 +40,15 @@ export function login(username, password) {
   if (!match) return false
 
   const fakeToken = generateFakeJwt(username)
-  const user = { username }
+  const user = { username, role: match.role }
   sessionStorage.setItem(TOKEN_KEY, fakeToken)
   sessionStorage.setItem(USER_KEY, JSON.stringify(user))
   token.value = fakeToken
   currentUser.value = user
   return true
 }
+
+export const isViewer = { get value() { return currentUser.value?.role === 'viewer' } }
 
 export function logout() {
   // 清除 token、user、以及所有頁面草稿
