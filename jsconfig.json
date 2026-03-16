@@ -3,13 +3,13 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src/**/*", "vite.config.js"]
 }
