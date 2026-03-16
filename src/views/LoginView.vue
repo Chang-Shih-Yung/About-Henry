@@ -20,7 +20,7 @@
       點擊啟用動態效果
     </button>
 
-    <Card class="w-full max-w-md shadow-lg relative z-10 bg-black/25 backdrop-blur-md border-white/10 text-white px-4 py-2">
+    <Card class="w-full max-w-md shadow-lg relative z-10 bg-black/10 backdrop-blur-md border-white/10 text-white px-4 py-2">
       <CardHeader class="text-center pb-2">
         <div class="mx-auto mb-3 w-10 h-10 rounded-full bg-primary flex items-center justify-center">
           <svg class="w-5 h-5 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -118,14 +118,13 @@ const rememberedUser = ref('')
 const offset = ref({ x: 0, y: 0 })
 const showGyroHint = ref(false)
 
-const DEFAULT_USER = 'henry1010921@gmail.com'
-
 onMounted(() => {
   const saved = getRememberedUser()
-  const username = saved || DEFAULT_USER
-  rememberedUser.value = username
-  form.value.username = username
-  form.value.remember = !!saved
+  if (saved) {
+    rememberedUser.value = saved
+    form.value.username = saved
+    form.value.remember = true
+  }
 
   // 陀螺儀（手機）
   const isMobile = window.matchMedia('(hover: none)').matches
