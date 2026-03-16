@@ -11,6 +11,7 @@
           class="border border-border rounded-xl overflow-hidden bg-card"
         >
           <AccordionTrigger class="px-4 py-3 hover:no-underline hover:bg-muted/50 [&>svg]:text-muted-foreground">
+            <template v-if="isViewer.value" #icon />
             <div class="flex items-center gap-3 min-w-0 flex-1">
               <Transition name="fade-icon">
                 <button
