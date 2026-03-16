@@ -21,6 +21,9 @@
         </RouterLink>
 
         <div class="ml-auto flex items-center gap-2">
+          <Badge v-if="!isOnline" variant="secondary" class="text-xs font-normal hidden sm:inline-flex text-muted-foreground">
+            離線中
+          </Badge>
           <Badge variant="outline" class="text-xs font-normal hidden sm:inline-flex">
             {{ currentUser?.username }}
           </Badge>
@@ -104,6 +107,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useDark, useToggle } from '@vueuse/core'
 import { token, currentUser, logout } from '@/service/keep.js'
 import { fileStatuses } from '@/service/saveStore.js'
+import { isOnline } from '@/composables/useOnline.js'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
