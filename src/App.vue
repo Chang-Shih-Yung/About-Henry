@@ -21,8 +21,9 @@
         </RouterLink>
 
         <div class="ml-auto flex items-center gap-2">
-          <Badge v-if="!isOnline" variant="secondary" class="text-xs font-normal hidden sm:inline-flex text-muted-foreground">
-            離線中
+          <Badge variant="secondary" class="text-xs font-normal hidden sm:inline-flex gap-1.5 items-center" :class="isOnline ? 'text-emerald-500' : 'text-muted-foreground'">
+            <span class="size-1.5 rounded-full" :class="isOnline ? 'bg-emerald-500' : 'bg-muted-foreground'"></span>
+            {{ isOnline ? '連線中' : '離線中' }}
           </Badge>
           <Badge variant="outline" class="text-xs font-normal hidden sm:inline-flex">
             {{ currentUser?.username }}
