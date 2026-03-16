@@ -21,10 +21,13 @@
         </RouterLink>
 
         <div class="ml-auto flex items-center gap-2">
+          <!-- 桌面：完整文字 badge -->
           <Badge variant="secondary" class="text-xs font-normal hidden sm:inline-flex gap-1.5 items-center" :class="isOnline ? 'text-emerald-500' : 'text-muted-foreground'">
             <span class="size-1.5 rounded-full" :class="isOnline ? 'bg-emerald-500' : 'bg-muted-foreground'"></span>
             {{ isOnline ? '連線中' : '離線中' }}
           </Badge>
+          <!-- 手機：只顯示圓點 -->
+          <span class="sm:hidden size-2 rounded-full" :class="isOnline ? 'bg-emerald-500' : 'bg-muted-foreground'"></span>
           <Badge variant="outline" class="text-xs font-normal hidden sm:inline-flex">
             {{ currentUser?.username }}
           </Badge>
