@@ -42,9 +42,10 @@
 **A：**
 金融業對資安合規要求很高，例如 弱點掃描、dependency audit。
 
-我做的事情是：把 AI Agent 接進 CI/CD pipeline，讓它在每次 PR 時自動掃描前端 code，標記潛在的 XSS、insecure dependency、敏感資訊外洩等問題，並回報掃描結果。
+我做的事情是：
+- 把 AI Agent 接進 CI/CD pipeline，讓它在每次 PR 時自動掃描前端 code，標記潛在的 XSS、insecure dependency、敏感資訊外洩等問題，並回報掃描結果。
 
-這讓前端工程師不再只是「功能交付者」，而是**主動參與資安防線**的角色。在金融場域，這個能力我認為特別有價值。
+- 主要是這讓前端不再只是「功能交付者」，而是**主動參與資安防線**的角色。
 
 ---
 
