@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 flex flex-col min-h-0 gap-2">
+  <div class="flex-1 flex flex-col min-h-0 gap-2" v-bind="attrs">
     <Separator class="shrink-0" />
 
     <div class="flex-1 overflow-y-auto min-h-0">
@@ -81,7 +81,9 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted, useAttrs } from 'vue'
+defineOptions({ inheritAttrs: false })
+const attrs = useAttrs()
 import { marked } from 'marked'
 import { X, Plus } from 'lucide-vue-next'
 import { authFetch } from '@/service/keep.js'
