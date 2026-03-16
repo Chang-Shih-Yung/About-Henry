@@ -90,7 +90,7 @@ export default defineConfig({
         ],
       },
       manifest: {
-        name: 'Henry Interview Prep',
+        name: '關於 Henry',
         short_name: 'Henry',
         theme_color: '#09090b',
         background_color: '#09090b',
