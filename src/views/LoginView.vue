@@ -87,6 +87,10 @@
             </svg>
             {{ loading ? '登入中…' : '登入' }}
           </Button>
+
+          <Button type="button" variant="outline" class="w-full bg-transparent border-white/20 text-white/70 hover:bg-white/10 hover:text-white hover:border-white/30" @click="handleGuestLogin">
+            訪客登入
+          </Button>
         </form>
       </CardContent>
 
@@ -178,6 +182,11 @@ function onGyro(e) {
 function fillRemembered() {
   form.value.username = rememberedUser.value
   form.value.remember = true
+}
+
+function handleGuestLogin() {
+  login('guest', 'fubon2025')
+  router.push('/intro')
 }
 
 async function handleLogin() {
