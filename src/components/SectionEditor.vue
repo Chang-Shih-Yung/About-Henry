@@ -2,7 +2,7 @@
   <div class="flex-1 flex flex-col min-h-0 gap-2" v-bind="attrs">
     <Separator class="shrink-0" />
 
-    <div class="flex-1 overflow-y-auto min-h-0 pb-4">
+    <div class="flex-1 overflow-y-auto min-h-0">
       <Accordion type="multiple" :model-value="isViewer.value ? [] : openItems" @update:model-value="v => !isViewer.value && (openItems = v)" class="flex flex-col gap-2 mb-4">
         <AccordionItem
           v-for="(section, i) in sections"
@@ -59,6 +59,8 @@
           <Plus class="size-5 text-muted-foreground" />
         </button>
       </div>
+      <!-- 底部 spacer：避免 overflow:auto 忽略 padding-bottom 的跨瀏覽器問題 -->
+      <div class="h-4 shrink-0" />
     </div>
   </div>
 
