@@ -1,6 +1,6 @@
 const OWNER = 'Chang-Shih-Yung'
 const REPO = 'About-Henry'
-const ALLOWED = ['Intro.md', 'QA.md', 'About.md']
+const ALLOWED = ['Intro.md', 'IntroGuest.md', 'QA.md', 'About.md']
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate')

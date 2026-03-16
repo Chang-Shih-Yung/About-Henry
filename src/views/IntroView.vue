@@ -49,9 +49,11 @@ const status = computed(() => fileStatuses['Intro.md'] || 'idle')
 
 watch(isOnline, (online) => { if (!online) mode.value = 'preview' })
 
+const introFile = isViewer.value ? 'IntroGuest.md' : 'Intro.md'
+
 onMounted(async () => {
   try {
-    const res = await authFetch('/api/load?filename=Intro.md')
+    const res = await authFetch(`/api/load?filename=${introFile}`)
     const data = await res.json()
     content.value = data.content || ''
   } catch { content.value = '' }

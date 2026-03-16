@@ -3,12 +3,11 @@
     <Separator class="shrink-0" />
 
     <div class="flex-1 overflow-y-auto min-h-0">
-      <Accordion type="multiple" v-model="openItems" class="flex flex-col gap-2 mb-4">
+      <Accordion type="multiple" :model-value="isViewer.value ? [] : openItems" @update:model-value="v => !isViewer.value && (openItems = v)" class="flex flex-col gap-2 mb-4">
         <AccordionItem
           v-for="(section, i) in sections"
           :key="i"
           :value="`item-${i}`"
-          :disabled="isViewer.value"
           class="border border-border rounded-xl overflow-hidden bg-card"
         >
           <AccordionTrigger class="px-4 py-3 hover:no-underline hover:bg-muted/50 [&>svg]:text-muted-foreground">
