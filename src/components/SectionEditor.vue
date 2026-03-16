@@ -8,6 +8,7 @@
           v-for="(section, i) in sections"
           :key="i"
           :value="`item-${i}`"
+          :disabled="isViewer.value"
           class="border border-border rounded-xl overflow-hidden bg-card"
         >
           <AccordionTrigger class="px-4 py-3 hover:no-underline hover:bg-muted/50 [&>svg]:text-muted-foreground">
@@ -28,7 +29,7 @@
             </div>
           </AccordionTrigger>
 
-          <AccordionContent class="p-0">
+          <AccordionContent v-if="!isViewer.value" class="p-0">
             <div class="border-t border-border" style="min-height:200px; max-height:400px;">
               <textarea
                 v-if="mode === 'edit'"
@@ -85,6 +86,7 @@ import { ref, watch, onMounted, onUnmounted, useAttrs } from 'vue'
 defineOptions({ inheritAttrs: false })
 const attrs = useAttrs()
 import { marked } from 'marked'
+import { isViewer } from '@/service/keep.js'
 import { X, Plus } from 'lucide-vue-next'
 import { authFetch } from '@/service/keep.js'
 import { fileStatuses, setStatus } from '@/service/saveStore.js'
@@ -122,7 +124,7 @@ function joinSections() {
 
 function initSections(raw) {
   sections.value = parseContent(raw)
-  openItems.value = sections.value.map((_, i) => `item-${i}`)
+  openItems.value = isViewer.value ? [] : sections.value.map((_, i) => `item-${i}`)
 }
 
 // 優先載入草稿，否則等 initialContent 傳入
