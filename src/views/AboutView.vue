@@ -3,7 +3,7 @@
     <div class="mb-2 shrink-0 flex items-center gap-3">
       <h1 class="text-xl font-bold text-foreground shrink-0">About</h1>
       <p class="text-sm text-muted-foreground hidden sm:block">
-        編輯 <code class="text-xs bg-muted px-1.5 py-0.5 rounded font-mono">About.md</code>
+        編輯 <code class="text-xs bg-muted px-1.5 py-0.5 rounded font-mono">content/About.md</code>
       </p>
       <div class="ml-auto flex items-center gap-2">
         <div v-if="!isViewer.value" class="flex gap-1 bg-muted p-1 rounded-lg">
@@ -25,7 +25,7 @@
         </Button>
       </div>
     </div>
-    <SectionEditor v-if="loaded" ref="editorRef" class="flex-1 min-h-0" filename="About.md" :initial-content="content" :mode="isViewer.value ? 'preview' : mode" />
+    <SectionEditor v-if="loaded" ref="editorRef" class="flex-1 min-h-0" filename="content/About.md" :initial-content="content" :mode="isViewer.value ? 'preview' : mode" />
     <div v-else class="flex items-center justify-center py-20 text-muted-foreground text-sm">載入中…</div>
   </div>
 </template>
@@ -43,13 +43,13 @@ const loaded = ref(false)
 const mode = ref('preview')
 const editorRef = ref(null)
 const modes = [{ key: 'edit', label: '編輯' }, { key: 'preview', label: '預覽' }]
-const status = computed(() => fileStatuses['About.md'] || 'idle')
+const status = computed(() => fileStatuses['content/About.md'] || 'idle')
 
 watch(isOnline, (online) => { if (!online) mode.value = 'preview' })
 
 onMounted(async () => {
   try {
-    const res = await authFetch('/api/load?filename=About.md')
+    const res = await authFetch('/api/load?filename=content/About.md')
     const data = await res.json()
     content.value = data.content || ''
   } catch { content.value = '' }

@@ -21,8 +21,7 @@ function localSavePlugin() {
         req.on('end', () => {
           try {
             const { filename, content } = JSON.parse(body)
-            // Only allow saving Intro.md or QA.md
-            const allowed = ['Intro.md', 'IntroGuest.md', 'QA.md', 'About.md']
+            const allowed = ['content/henry/Intro.md', 'content/QA.md', 'content/About.md']
             if (!allowed.includes(filename)) {
               res.statusCode = 400
               res.end(JSON.stringify({ ok: false, error: 'Invalid filename' }))
@@ -47,7 +46,7 @@ function localSavePlugin() {
         }
         const url = new URL(req.url, 'http://localhost')
         const filename = url.searchParams.get('filename')
-        const allowed = ['Intro.md', 'IntroGuest.md', 'QA.md', 'About.md']
+        const allowed = ['content/henry/Intro.md', 'content/guest/Intro.md', 'content/QA.md', 'content/About.md']
         if (!allowed.includes(filename)) {
           res.statusCode = 400
           res.end(JSON.stringify({ ok: false, error: 'Invalid filename' }))
