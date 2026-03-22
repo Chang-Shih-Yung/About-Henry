@@ -140,6 +140,7 @@ const navItems = [
   { to: '/data', label: 'Data' },
   { to: '/nexus', label: 'Nexus' },
   { to: '/focus', label: 'Focus' },
+  { to: '/mes', label: 'MES' },
 ]
 
 const hasDirty = computed(() =>
