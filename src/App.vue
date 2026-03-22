@@ -83,7 +83,7 @@
     </nav>
 
     <!-- Main：flex-1 讓它佔滿剩餘高度 -->
-    <main class="flex-1 overflow-hidden" :class="isLoggedIn && !isLoginPage ? 'max-w-6xl w-full mx-auto px-4 py-5' : ''">
+    <main class="flex-1 overflow-x-hidden" :class="isLoggedIn && !isLoginPage ? 'max-w-6xl w-full mx-auto px-4 py-5' : ''">
       <RouterView />
     </main>
 

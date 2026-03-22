@@ -59,8 +59,8 @@
           <Plus class="size-5 text-muted-foreground" />
         </button>
       </div>
-      <!-- 底部 spacer：避免 overflow:auto 忽略 padding-bottom 的跨瀏覽器問題 -->
-      <div class="h-4 shrink-0" />
+      <!-- 底部 spacer -->
+      <div class="h-6 shrink-0" />
     </div>
   </div>
 
