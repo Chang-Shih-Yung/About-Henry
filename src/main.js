@@ -9,6 +9,7 @@ import IntroView from './views/IntroView.vue'
 import QAView from './views/QAView.vue'
 import AboutView from './views/AboutView.vue'
 import DataView from './views/DataView.vue'
+import NexusView from './views/NexusView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -19,6 +20,7 @@ const router = createRouter({
     { path: '/qa', component: QAView },
     { path: '/about', component: AboutView },
     { path: '/data', component: DataView },
+    { path: '/nexus', component: NexusView },
   ],
 })
 

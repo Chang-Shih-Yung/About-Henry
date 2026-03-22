@@ -1,6 +1,6 @@
 const OWNER = 'Chang-Shih-Yung'
 const REPO = 'About-Henry'
-const ALLOWED = ['content/henry/Intro.md', 'content/QA.md', 'content/About.md', 'content/Data.md']
+const ALLOWED = ['content/henry/Intro.md', 'content/QA.md', 'content/About.md', 'content/Data.md', 'content/Nexus.md']
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
