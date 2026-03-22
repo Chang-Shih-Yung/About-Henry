@@ -31,7 +31,7 @@
 
 ## 自我學習
 
-- **線上學習證書 + side project**：Udemy 取得 Unity + C# 以及Vue JS框架學習證書，實作遊戲互動系統，學到「即時回饋」跟「狀態管理」比一般網頁嚴苛的視角
+- **線上學習證書 + side project**：Udemy 取得 Unity + C# 以及Vue JS框架學習證書，實作遊戲互動系統，用不同視角學習「狀態」跟「物件」的關係。
 - **自主開發 UI System + CLI 工具**：Nexus 元件庫，59+ 生產元件、5 種主題、公開 npm CLI
 - **自建 AI + 金融每日報表**：串接 OpenClaw（Claw.ai）API，每日自動摘要市場資訊，練習把 AI 整合進實際業務流程的能力
 
