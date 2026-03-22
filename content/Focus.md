@@ -73,8 +73,5 @@
 - 文件撰寫：Nexus 元件庫有完整技術文件與 CLI 使用指南
 
 **主動補強計畫**
-- **SQL / 資料查詢**：報名中，補強數據中台的查詢與分析能力
-- **資料工程路徑**：目標取得 Azure Data Engineer Associate（DP-201）+ Google Professional Data Engineer 認證，系統補足資料管線與數據中台的實作能力
-- **AI / ML 應用**：規劃 Azure AI Engineer Associate（AI-102）+ TensorFlow Developer Certificate，搭配 Generative AI with LLMs 課程，把 AI 整合能力從 side project 升級到可落地的工程規格
-- **金融知識每日更新**：已自建 OpenClaw（龍蝦 AI）+ 每日自動摘要工具，固定吸收富邦研究報告與市場資訊，讓金融背景知識跟得上業務語境
-- **雲端 & 容器**：AWS Associate + CKA（Kubernetes 管理員認證）納入規劃，補強跨雲端與容器化部署的工程視角
+- **SQL / 資料查詢相關證照**：補強數據中台的查詢與分析能力
+- **金融知識每日更新**：已自建 OpenClaw（龍蝦 AI）+ 每日自動摘要工具，固定吸收富邦研究報告與市場資訊
