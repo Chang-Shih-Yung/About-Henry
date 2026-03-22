@@ -137,6 +137,7 @@ const navItems = [
   { to: '/intro', label: 'Intro' },
   { to: '/qa', label: 'Q&A' },
   { to: '/about', label: 'About' },
+  { to: '/data', label: 'Data' },
 ]
 
 const hasDirty = computed(() =>
