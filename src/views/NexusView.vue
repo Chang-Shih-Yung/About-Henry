@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import SectionEditor from '@/components/SectionEditor.vue'
 import { authFetch, isViewer } from '@/service/keep.js'
 import { fileStatuses } from '@/service/saveStore.js'
@@ -47,10 +47,12 @@ const status = computed(() => fileStatuses['content/Nexus.md'] || 'idle')
 
 watch(isOnline, (online) => { if (!online) mode.value = 'preview' })
 
-const res = await authFetch('/api/load?filename=content/Nexus.md').catch(() => null)
-if (res?.ok) {
-  const data = await res.json()
-  content.value = data.content || ''
-}
-loaded.value = true
+onMounted(async () => {
+  try {
+    const res = await authFetch('/api/load?filename=content/Nexus.md')
+    const data = await res.json()
+    content.value = data.content || ''
+  } catch { content.value = '' }
+  loaded.value = true
+})
 </script>
