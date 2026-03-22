@@ -19,7 +19,7 @@
 - Figma Variables → JSON → CSS Token → Angular Component 全鏈路打通
 - 用 AI Agent 把 React 元件自動轉成 Angular，60% 元件由此生成
 - CLI 一鍵安裝：`npx @nexus/cli add button`，源碼直接進專案
-- 整合 Semgrep 資安工具進 CI/CD，自動阻擋高風險漏洞
+- 整合資安白箱工具進 CI/CD，自動阻擋高風險漏洞
 → 元件開發時間降低 90%+，設計到交付的鏈路完全打通
 
 ---
