@@ -17,10 +17,14 @@
 
 **第二個：AI Agent 自動化 × Figma 到前端（Nexus 元件庫）**
 我建了一套 Angular 企業元件庫，並自己串 AI Agent 做自動化維護：
-- Figma Variables → JSON → CSS Token → Angular Component 全鏈路打通
+- Figma Variables → JSON → CSS Token 
+
+→ Angular Component 全鏈路打通
+
 - 用 AI Agent 把 React 元件自動轉成 Angular，60% 元件由此生成
 - CLI 一鍵安裝：`npx @nexus/cli add button`，源碼直接進專案
 - 整合資安白箱工具進 CI/CD，自動阻擋高風險漏洞
+
 → 元件開發時間降低 90%+，設計到交付的鏈路完全打通
 
 ---
