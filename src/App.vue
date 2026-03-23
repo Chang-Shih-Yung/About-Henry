@@ -141,6 +141,7 @@ const navItems = [
   { to: '/nexus', label: 'Nexus' },
   { to: '/focus', label: 'Focus' },
   { to: '/mes', label: 'MES' },
+  { to: '/presentation', label: '簡報稿' },
 ]
 
 const hasDirty = computed(() =>
