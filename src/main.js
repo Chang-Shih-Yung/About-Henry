@@ -12,6 +12,7 @@ import DataView from './views/DataView.vue'
 import NexusView from './views/NexusView.vue'
 import FocusView from './views/FocusView.vue'
 import MESView from './views/MESView.vue'
+import PresentationView from './views/PresentationView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -25,6 +26,7 @@ const router = createRouter({
     { path: '/nexus', component: NexusView },
     { path: '/focus', component: FocusView },
     { path: '/mes', component: MESView },
+    { path: '/presentation', component: PresentationView },
   ],
 })
 
